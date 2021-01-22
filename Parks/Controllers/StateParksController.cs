@@ -56,5 +56,14 @@ namespace Parks.Controllers
       _db.SaveChanges();
     }
 
+    // PUT api/stateparks/[int]
+    [HttpPut("{id}")]
+    public void Put(int id, [FromBody] StatePark statePark)
+    {
+      statePark.StateParkId = id;
+      _db.Entry(statePark).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+      _db.SaveChanges();
+    }
+    
   }
 }
