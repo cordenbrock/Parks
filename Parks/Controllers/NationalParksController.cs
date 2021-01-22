@@ -40,7 +40,7 @@ namespace Parks.Controllers
       return query.ToList();
     }
 
-    // GET api/nationalparks/5
+    // GET api/nationalparks/[int]
     [HttpGet("{id}")]
     public ActionResult<NationalPark> Get(int id)
     {
@@ -56,11 +56,14 @@ namespace Parks.Controllers
       _db.SaveChanges();
     }
 
-    // // PUT api/nationalparks/5
-    // [HttpPut("{id}")]
-    // public void Put(int id, [FromBody] string value)
-    // {
-    // }
+    // PUT api/nationalparks/[int]
+    [HttpPut("{id}")]
+    public void Put(int id, [FromBody] NationalPark nationalPark)
+    {
+      nationalPark.NationalParkId = id;
+      _db.Entry(nationalPark).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+      _db.SaveChanges();
+    }
 
     // // DELETE api/nationalparks/5
     // [HttpDelete("{id}")]
