@@ -64,6 +64,14 @@ namespace Parks.Controllers
       _db.Entry(statePark).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
       _db.SaveChanges();
     }
-    
+
+    // DELETE api/stateparks/[int]
+    [HttpDelete("{id}")]
+    public void Delete(int id)
+    {
+      var statePark = _db.StateParks.FirstOrDefault(entry => entry.StateParkId ==  id);
+      _db.Remove(statePark);
+      _db.SaveChanges();
+    }
   }
 }
