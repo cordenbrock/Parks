@@ -48,11 +48,13 @@ namespace Parks.Controllers
       return nationalPark;
     }
 
-    // // POST api/nationalparks
-    // [HttpPost]
-    // public void Post([FromBody] string value)
-    // {
-    // }
+    // POST api/nationalparks
+    [HttpPost]
+    public void Post([FromBody] NationalPark nationalPark)
+    {
+      _db.NationalParks.Add(nationalPark);
+      _db.SaveChanges();
+    }
 
     // // PUT api/nationalparks/5
     // [HttpPut("{id}")]
