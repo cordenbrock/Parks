@@ -48,6 +48,13 @@ namespace Parks.Controllers
       return statePark;
     }
 
+    // POST api/stateparks
+    [HttpPost]
+    public void Post([FromBody] StatePark statePark)
+    {
+      _db.StateParks.Add(statePark);
+      _db.SaveChanges();
+    }
 
   }
 }
