@@ -65,10 +65,13 @@ namespace Parks.Controllers
       _db.SaveChanges();
     }
 
-    // // DELETE api/nationalparks/5
-    // [HttpDelete("{id}")]
-    // public void Delete(int id)
-    // {
-    // }
+    // DELETE api/nationalparks/[int]
+    [HttpDelete("{id}")]
+    public void Delete(int id)
+    {
+      var nationalPark = _db.NationalParks.FirstOrDefault(entry => entry.NationalParkId ==  id);
+      _db.Remove(nationalPark);
+      _db.SaveChanges();
+    }
   }
 }
