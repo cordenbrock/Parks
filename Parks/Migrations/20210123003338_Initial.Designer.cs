@@ -8,7 +8,7 @@ using Parks.Models;
 namespace Parks.Migrations
 {
     [DbContext(typeof(ParksContext))]
-    [Migration("20210122213335_Initial")]
+    [Migration("20210123003338_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

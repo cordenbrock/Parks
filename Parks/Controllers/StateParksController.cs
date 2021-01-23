@@ -1,13 +1,12 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Parks.Models;
 
 namespace Parks.Controllers
 {
-  [Route("api/[controller]")]
+
+  [Route("api/stateparks")]
   [ApiController]
   public class StateParksController : ControllerBase
   {
@@ -19,28 +18,15 @@ namespace Parks.Controllers
     }
 
 
-    // GET api/stateparks?name=[name]
+    // GET api/1/stateparks
     [HttpGet]
-    public ActionResult<IEnumerable<StatePark>> Get(string name, string location, string description)
+    public ActionResult<IEnumerable<StatePark>> Get()
     {
-      var query = from p in _db.StateParks select p;
-      if (name != null)
-      {
-        query = query.Where(entry => entry.Name.Contains(name));
-      }
-      if (location != null)
-      {
-        query = query.Where(entry => entry.Location.Contains(location));
-      }
-      if (description != null)
-      {
-        query = query.Where(entry => entry.Description.Contains(description));
-      }
-
+      var query = _db.StateParks.AsQueryable();
       return query.ToList();
     }
 
-    // GET api/stateparks/[int]
+    // GET api/1/stateparks/[int]
     [HttpGet("{id}")]
     public ActionResult<StatePark> Get(int id)
     {
@@ -48,7 +34,7 @@ namespace Parks.Controllers
       return statePark;
     }
 
-    // POST api/stateparks
+    // POST api/1/stateparks
     [HttpPost]
     public void Post([FromBody] StatePark statePark)
     {
@@ -56,7 +42,7 @@ namespace Parks.Controllers
       _db.SaveChanges();
     }
 
-    // PUT api/stateparks/[int]
+    // PUT api/1/stateparks/[int]
     [HttpPut("{id}")]
     public void Put(int id, [FromBody] StatePark statePark)
     {
@@ -65,7 +51,7 @@ namespace Parks.Controllers
       _db.SaveChanges();
     }
 
-    // DELETE api/stateparks/[int]
+    // DELETE api/1/stateparks/[int]
     [HttpDelete("{id}")]
     public void Delete(int id)
     {
@@ -73,5 +59,28 @@ namespace Parks.Controllers
       _db.Remove(statePark);
       _db.SaveChanges();
     }
+
+
+
+    // SEARCH api/1/stateparks?search=[string]
+    // [HttpGet("search")]
+    // public ActionResult<IEnumerable<StatePark>> Search(string name, string location, string description)
+    // {
+    //         var query = from p in _db.StateParks select p;
+    //   if (name != null)
+    //   {
+    //     query = query.Where(entry => entry.Name.Contains(name));
+    //   }
+    //   if (location != null)
+    //   {
+    //     query = query.Where(entry => entry.Location.Contains(location));
+    //   }
+    //   if (description != null)
+    //   {
+    //     query = query.Where(entry => entry.Description.Contains(description));
+    //   }
+
+    //   return query.ToList();
+    // }
   }
 }
