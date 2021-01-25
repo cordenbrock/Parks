@@ -36,8 +36,22 @@ namespace Parks.Migrations
                         {
                             NationalParkId = 1,
                             Description = "Weird-looking trees",
-                            Name = "Joshua Tree",
+                            Name = "Joshua Tree NP",
                             State = "CA"
+                        },
+                        new
+                        {
+                            NationalParkId = 2,
+                            Description = "Weird-looking rocks",
+                            Name = "Arches NP",
+                            State = "UT"
+                        },
+                        new
+                        {
+                            NationalParkId = 3,
+                            Description = "Weird-looking Gators",
+                            Name = "Everglades NP",
+                            State = "FL"
                         });
                 });
 
@@ -55,6 +69,29 @@ namespace Parks.Migrations
                     b.HasKey("StateParkId");
 
                     b.ToTable("StateParks");
+
+                    b.HasData(
+                        new
+                        {
+                            StateParkId = 1,
+                            Description = "Weird-looking trees",
+                            Location = "IN",
+                            Name = "Turkey Run SP"
+                        },
+                        new
+                        {
+                            StateParkId = 2,
+                            Description = "Weird-looking lizards",
+                            Location = "UT",
+                            Name = "Snow Canyon SP"
+                        },
+                        new
+                        {
+                            StateParkId = 3,
+                            Description = "Weird-looking plants",
+                            Location = "NV",
+                            Name = "Valley of Fire SP"
+                        });
                 });
 #pragma warning restore 612, 618
         }

@@ -1,12 +1,14 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Parks.Models;
 
 namespace Parks.Controllers
 {
 
-  [Route("api/stateparks")]
+  [Route("api/[controller]")]
   [ApiController]
   public class StateParksController : ControllerBase
   {
@@ -18,7 +20,7 @@ namespace Parks.Controllers
     }
 
 
-    // GET api/1/stateparks
+    // GET api/stateparks
     [HttpGet]
     public ActionResult<IEnumerable<StatePark>> Get()
     {
@@ -26,7 +28,7 @@ namespace Parks.Controllers
       return query.ToList();
     }
 
-    // GET api/1/stateparks/[int]
+    // GET api/stateparks/[int]
     [HttpGet("{id}")]
     public ActionResult<StatePark> Get(int id)
     {
@@ -34,7 +36,7 @@ namespace Parks.Controllers
       return statePark;
     }
 
-    // POST api/1/stateparks
+    // POST api/stateparks
     [HttpPost]
     public void Post([FromBody] StatePark statePark)
     {
@@ -42,7 +44,7 @@ namespace Parks.Controllers
       _db.SaveChanges();
     }
 
-    // PUT api/1/stateparks/[int]
+    // PUT api/stateparks/[int]
     [HttpPut("{id}")]
     public void Put(int id, [FromBody] StatePark statePark)
     {
@@ -51,7 +53,7 @@ namespace Parks.Controllers
       _db.SaveChanges();
     }
 
-    // DELETE api/1/stateparks/[int]
+    // DELETE api/stateparks/[int]
     [HttpDelete("{id}")]
     public void Delete(int id)
     {
@@ -62,25 +64,25 @@ namespace Parks.Controllers
 
 
 
-    // SEARCH api/1/stateparks?search=[string]
-    // [HttpGet("search")]
-    // public ActionResult<IEnumerable<StatePark>> Search(string name, string location, string description)
-    // {
-    //         var query = from p in _db.StateParks select p;
-    //   if (name != null)
-    //   {
-    //     query = query.Where(entry => entry.Name.Contains(name));
-    //   }
-    //   if (location != null)
-    //   {
-    //     query = query.Where(entry => entry.Location.Contains(location));
-    //   }
-    //   if (description != null)
-    //   {
-    //     query = query.Where(entry => entry.Description.Contains(description));
-    //   }
+    // SEARCH api/stateparks?search=[string]
+    [HttpGet("search")]
+    public ActionResult<IEnumerable<StatePark>> Search(string name, string location, string description)
+    {
+      var query = _db.StateParks.AsQueryable();
+      if (name != null)
+      {
+        query = query.Where(entry => entry.Name.Contains(name));
+      }
+      if (location != null)
+      {
+        query = query.Where(entry => entry.Location.Contains(location));
+      }
+      if (description != null)
+      {
+        query = query.Where(entry => entry.Description.Contains(description));
+      }
 
-    //   return query.ToList();
-    // }
+      return query.ToList();
+    }
   }
 }
