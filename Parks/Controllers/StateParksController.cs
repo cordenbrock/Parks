@@ -66,7 +66,7 @@ namespace Parks.Controllers
 
   [ApiController]
   [ApiVersion("2.0")]
-  [Route("api/messages")]
+  [Route("api/[controller]")]
 
     public class StateParksV2Controller : ControllerBase
     {
