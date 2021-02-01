@@ -9,12 +9,13 @@ namespace Parks.Controllers
 {
 
   [Route("api/[controller]")]
+  [ApiVersion("1.0")]
   [ApiController]
-  public class StateParksController : ControllerBase
+  public class StateParksV1Controller : ControllerBase
   {
     private readonly ParksContext _db;
     
-    public StateParksController(ParksContext db)
+    public StateParksV1Controller(ParksContext db)
     {
       _db = db;
     }
@@ -61,8 +62,20 @@ namespace Parks.Controllers
       _db.Remove(statePark);
       _db.SaveChanges();
     }
+  }
 
+  [ApiController]
+  [ApiVersion("2.0")]
+  [Route("api/messages")]
 
+    public class StateParksV2Controller : ControllerBase
+    {
+    private readonly ParksContext _db;
+    
+    public StateParksV2Controller(ParksContext db)
+    {
+      _db = db;
+    }
 
     // SEARCH api/stateparks?search=[string]
     [HttpGet("search")]
